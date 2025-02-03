@@ -42,18 +42,33 @@ class Dragon(Monster):
         self.element = element
 
     def breathe_fire(self):
-        return f"{self.name} breathes {self.element} Blow!"
+        return f"{self.name} breathes {self.element} Blow"
 
-weapon_list = [
-    Weapon("Sword", 45),
-    Weapon("Fire Bow", 60),
-    Weapon("Club", 65),
-    Weapon("Shuriken", 50),
-]
+class MonsterNameGenerator:
+    def __init__(self):
+        self.animal_names = [
+            "Tiger", "Lion", "Wolf", "Eagle", "Hawk", "Bear", "Panther", "Cobra", "Leopard", "Falcon",
+            "Cat", "Shark", "Dog", "Cow", "Goat", "Hyena", "Jaguar", "Python", "Buffalo", "Tarantula"
+        ]
+        self.used_names = set()
+
+    def generate_name(self):
+        if len(self.used_names) >= len(self.animal_names):
+            return "Unknown Monster"
+        while True:
+            name = random.choice(self.animal_names)
+            if name not in self.used_names:
+                self.used_names.add(name)
+                return name
+
+name_generator = MonsterNameGenerator()
+
+weapon_list = [ Weapon("Sword", 45),Weapon("Fire Bow", 60),Weapon("Club", 65),Weapon("Shuriken", 50), ]
 
 monsters = []
 for i in range(20):
-    monster = Dragon(f"Dragon-{i+1}", random.randint(100, 200), random.randint(20, 50), "Blow!")
+    monster_name = name_generator.generate_name()
+    monster = Dragon(monster_name, random.randint(100, 200), random.randint(20, 50), "Blow")
     monster.add_weapon(random.choice(weapon_list))
     monster.add_weapon(random.choice(weapon_list))
     monsters.append(monster)
