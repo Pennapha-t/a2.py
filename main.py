@@ -29,12 +29,12 @@ class Monster:
         if len(self.weapons) > 1:
             self.current_weapon = self.weapons[1] if self.current_weapon == self.weapons[0] else self.weapons[0]
             return f"{self.name} switched to {self.current_weapon.name}"
-        return f"{self.name} does not have enough weapons to switch"
+        return f"{self.name}"
 
     def use_weapon(self):
         if self.current_weapon:
             return self.current_weapon.use()
-        return f"{self.name} has no weapon equipped"
+        return f"{self.name}"
 
 class Dragon(Monster):
     def __init__(self, name, health, attack_level, element):
@@ -45,10 +45,10 @@ class Dragon(Monster):
         return f"{self.name} breathes {self.element} Blow!"
 
 weapon_list = [
-    Weapon("Flame Sword", 50),
-    Weapon("Ice Bow", 40),
-    Weapon("Thunder Axe", 60),
-    Weapon("Poison Spear", 45),
+    Weapon("Sword", 45),
+    Weapon("Fire Bow", 60),
+    Weapon("Club", 65),
+    Weapon("Shuriken", 50),
 ]
 
 monsters = []
